@@ -64,7 +64,14 @@ $(document).ready(function(){
       $('#' + i + '.characterHealth').html('Current Health: ' + characters[i].currentHitPoints + " / " + characters[i].totalHitPoints);
       $('#' + i + '.characterAttack').html('Attack Power: ' + characters[i].attackPower);
     }
+  }
 
+  function prepareSelection(){
+
+    for (var i = 0; i < characters.length; i++){
+      var subString = characters[i].characterName.substring(0, (characters[i].characterName.indexOf(" ")));
+      $('#' + i + '.selectButton').html('<button id="' + i + '">Select ' + subString + '</button>');
+    }
   }
 
   for (var i = 0; i < characters.length; i++){
@@ -84,6 +91,7 @@ $(document).ready(function(){
     $('#characterSelection').append($genericCharacter);
 
     updateCharacters();
+    prepareSelection();
   }
 
   $()
