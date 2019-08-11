@@ -25,6 +25,7 @@ var bobaFett = new Character('Boba Fett', 150, 20, "bobaFett");
 var darthMaul = new Character('Darth Maul', 180, 25, "darthMaul");
 
 var characters = [obiWan, lukeSkywalker, bobaFett, darthMaul];
+var message = "";
 // var defeatedCharacters = 0;
 var playerCharacter;
 var enemyCharacter;
@@ -129,6 +130,11 @@ $(document).ready(function () {
       characters[playerCharacter].attack(characters[enemyCharacter]);
       updateCharacters();
     }
+  });
+
+  $("body").on("click", ".buttonArea button.attackButton", function() {
+    characters[playerCharacter].attack(characters[enemyCharacter]);
+    updateCharacters();
   });
 });
 
