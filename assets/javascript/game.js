@@ -42,6 +42,8 @@ function updateCharacters() {
 
 function prepareSelection() {
 
+  $('#instructionHeading').html('<h2>Select A Character</h2>');
+
   for (var i = 0; i < characters.length; i++) {
     var subString = characters[i].characterName.substring(0, (characters[i].characterName.indexOf(" ")));
     $('#' + i + '.buttonArea').html('<button class="selectButton" id="' + i + '">Select ' + subString + '</button>');
@@ -60,6 +62,8 @@ function createEnemies() {
 }
 
 function prepareEnemy() {
+  $('#instructionHeading').html('<h2>Select An Opponent</h2>');
+
   for (var i = 0; i < characters.length; i++) {
     if (i != playerCharacter) {
 
@@ -78,6 +82,7 @@ function prepareEnemy() {
 }
 
 function chooseEnemy(index) {
+  $('#instructionHeading').html('<h2>Fight!</h2>');
   console.log(index);
   for (var i = 0; i < characters.length; i++) {
     if (i != playerCharacter) {
@@ -109,12 +114,16 @@ function checkVictory() {
     message += "<br />You won the game!";
     $('#notificationArea').html(message);
     $('.buttonArea').html('');
+    $('#instructionHeading').html('<h2>You Won!</h2>');
+
 
   }
   if (characters[playerCharacter].currentHitPoints <= 0) {
     message += "<br />You lost the game!";
     $('#notificationArea').html(message);
     $('.buttonArea').html('');
+    $('#instructionHeading').html('<h2>You Lost!</h2>');
+
   }
 }
 
