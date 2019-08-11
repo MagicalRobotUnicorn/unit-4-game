@@ -13,12 +13,16 @@ function Character(characterName, hitPoints, attackPower, fileName) {
 }
 
 Character.prototype.attack = function (enemyCharacter) {
-  enemyCharacter.currentHitPoints -= this.attackPower;
-  this.currentHitPoints -= enemyCharacter.attackPower;
-
   message = "";
+
+  enemyCharacter.currentHitPoints -= this.attackPower;
   message += this.characterName + " attacked " + enemyCharacter.characterName + " for " + this.attackPower + ' damage.<br />';
-  message += enemyCharacter.characterName + " struck back for " + enemyCharacter.attackPower + ' damage.<br />';
+
+  if (enemyCharacter.currentHitPoints > 0){
+    this.currentHitPoints -= enemyCharacter.attackPower;
+    message += enemyCharacter.characterName + " struck back for " + enemyCharacter.attackPower + ' damage.<br />';
+  }
+
   this.attackPower *= 2;
 }
 
@@ -120,6 +124,7 @@ function checkVictory() {
   }
   if (characters[playerCharacter].currentHitPoints <= 0) {
     message += "<br />You lost the game!";
+    $('#' + playerCharacter + '.character').addClass('defeated');
     $('#notificationArea').html(message);
     $('.buttonArea').html('');
     $('#instructionHeading').html('<h2>You Lost!</h2>');
