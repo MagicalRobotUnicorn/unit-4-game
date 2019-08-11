@@ -5,6 +5,10 @@
   margin: 10px;
 }
 
+.defeated {
+  background: red;
+}
+
 .characterImage {
   width: 150px;
   height: auto;
