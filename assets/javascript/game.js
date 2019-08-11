@@ -6,18 +6,6 @@
 
 // Character Class
 
-function Character(characterName, hitPoints, attackPower) {
-  this.characterName = characterName;
-  this.hitPoints = hitPoints;
-  this.attackPower = attackPower;
-}
-
-Character.prototype.attack = function(enemyCharacter) {
-  enemyCharacter.hitPoints -= this.attackPower;
-  this.hitPoints -= enemyCharacter.attackPower;
-
-  this.attackPower *= 2;
-}
 
 
 // Character Selection
@@ -50,10 +38,12 @@ $(document).ready(function(){
   var darthMaul = new Character('Darth Maul', 180, 25, "darthMaul");
 
   var characters = [obiWan, lukeSkywalker, bobaFett, darthMaul];
-  var enemyCharacters = [];
-  var remainingCharacters = characters.length;
-  var playerCharater;
-  var deadCharacters = [];
+  var playerCharacter;
+
+  // var enemyCharacters = [];
+  // var remainingCharacters = characters.length;
+  // var playerCharater;
+  // var deadCharacters = [];
 
 
   var $genericCharacter;
@@ -94,8 +84,14 @@ $(document).ready(function(){
     prepareSelection();
   }
 
-  $()
+  $('.selectButton').on('click', function() {
+      playerCharacter = $(this).attr('id');
+  });
 });
+
+// Update On click events for preparation
+
+// Push characters or save index of player character (add class?)
 
 
 
