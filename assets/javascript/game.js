@@ -13,9 +13,12 @@ function Character(characterName, hitPoints, attackPower, fileName) {
 }
 
 Character.prototype.attack = function (enemyCharacter) {
-  enemyCharacter.hitPoints -= this.attackPower;
-  this.hitPoints -= enemyCharacter.attackPower;
+  enemyCharacter.currentHitPoints -= this.attackPower;
+  this.currentHitPoints -= enemyCharacter.attackPower;
 
+  message = "";
+  message += this.characterName + " attacked " + enemyCharacter.characterName + " for " + this.attackPower + ' damage.<br />';
+  message += enemyCharacter.characterName + " struck back for " + enemyCharacter.attackPower + ' damage.<br />';
   this.attackPower *= 2;
 }
 
@@ -59,17 +62,20 @@ function createEnemies() {
 
 function prepareEnemy() {
   for (var i = 0; i < characters.length; i++) {
-    if (i != playerCharacter) {
-      var subString = characters[i].characterName.substring(0, (characters[i].characterName.indexOf(" ")));
+    if (i != playerCharacter) { 
 
-      $('#' + i + '.selectButton').addClass('chooseEnemyButton');
-      $('#' + i + '.chooseEnemyButton').removeClass('selectButton');
-      $('#' + i + '.chooseEnemyButton').text('Fight ' + subString);
-    }
+        var subString = characters[i].characterName.substring(0, (characters[i].characterName.indexOf(" ")));
+        $('#' + i + '.buttonArea').html('<button class="selectButton" id="' + i + '">Select ' + subString + '</button>');
+        $('#' + i + '.selectButton').addClass('chooseEnemyButton');
+        $('#' + i + '.chooseEnemyButton').removeClass('selectButton');
+        $('#' + i + '.chooseEnemyButton').text('Fight ' + subString);
+      }
+    
     else {
       $('#' + i + '.buttonArea').html('');
     }
   }
+  $('.defeated .buttonArea').html('');
 }
 
 function chooseEnemy(index) {
@@ -88,6 +94,28 @@ function chooseEnemy(index) {
   $currentEnemy.append($('#' + index + '.character'));
 }
 
+function checkCharacters() {
+  if (characters[enemyCharacter].currentHitPoints <= 0) {
+    $('#' + enemyCharacter + '.character').addClass('defeated');
+    message += "<br />You defeated " + characters[enemyCharacter].characterName + "!!";
+
+    createEnemies();
+    prepareEnemy();
+  }
+  $('#notificationArea').html(message);
+}
+
+function checkVictory() {
+  if ($('.defeated').length == 3){
+    message += "<br />You won the game!";
+    $('#notificationArea').html(message);
+
+  }
+  if (characters[playerCharacter].currentHitPoints <= 0){
+    message += "<br />You lost the game!";
+    $('#notificationArea').html(message);
+  }
+}
 
 function prepareGame() {
 
@@ -117,6 +145,7 @@ $(document).ready(function () {
 
   $('button').on('click', function () {
     if (this.classList.contains('chooseEnemyButton')) {
+      console.log("Hello");
       enemyCharacter = $(this).attr('id');
       chooseEnemy(enemyCharacter);
     }
@@ -125,16 +154,18 @@ $(document).ready(function () {
       createEnemies();
       prepareEnemy();
     }
-    else if (this.classList.contains('attackButton')) {
-      console.log("Hello");
-      characters[playerCharacter].attack(characters[enemyCharacter]);
-      updateCharacters();
-    }
   });
 
-  $("body").on("click", ".buttonArea button.attackButton", function() {
+  $("body").on("click", ".buttonArea button.attackButton", function () {
     characters[playerCharacter].attack(characters[enemyCharacter]);
     updateCharacters();
+    checkCharacters();
+    checkVictory();
+  });
+
+  $("body").on("click", ".buttonArea button.chooseEnemyButton", function () {
+    enemyCharacter = $(this).attr('id');
+    chooseEnemy(enemyCharacter);
   });
 });
 
