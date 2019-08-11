@@ -1,0 +1,25 @@
+.character {
+  width: 400px;
+  height: 250px;
+  background: green;
+}
+
+.characterImage {
+  width: 150px;
+  height: auto;
+  margin-left: 20px;
+  margin-right: auto;
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
+.characterName {
+  margin-top: 35px;
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.characterButton {
+  margin-top: 45px;
+  margin-left: 30px;
+}
