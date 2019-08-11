@@ -56,45 +56,37 @@ $(document).ready(function(){
   var deadCharacters = [];
 
 
-  // <div class="character" id="0">
-  //       <img src="./assets/images/bobaFett.jpg" class="characterImage">
-  //       <div class="characterHealth" id="0"></div>
-          
-  //       <div id="playerOptions"></div>
-  // </div>
-
   var $genericCharacter;
 
-  // for (var i = 0; i < characters.length; i++){
-  //   var $genericCharacter = $('<div>').addClass('character');
-  //   $genericCharacter.attr("id", i);
-  //   // $genericCharacter.find('#firstCol' + i).after('<div class="col-md-6 id="secondCol' + i +'">').append('<div class="characterName">').html(characters[i].characterName).append('<div class="characterAttack" id="' + i + '">');
-  //   $genericCharacter.append('<div class="row" id="row' + i + '">').append('<div class="col-6" id="firstCol' + i + '">').append('<img src="./assets/images/' + characters[i].fileName + '.jpg" class="characterImage">');
-  //   $genericCharacter.find('#row' + i).append('<div class="col-6" id="secondCol' + i +'">').append('<div class="characterName">').html(characters[i].characterName).append('<div class="characterAttack" id="' + i + '">');
+  function updateCharacters(){
+    for (var i = 0; i < characters.length; i++){
+      $('#' + i + '.characterName').html(characters[i].characterName);
+      $('#' + i + '.characterHealth').html('Current Health: ' + characters[i].currentHitPoints + " / " + characters[i].totalHitPoints);
+      $('#' + i + '.characterAttack').html('Attack Power: ' + characters[i].attackPower);
+    }
 
-  //   $('#characterSelection').append($genericCharacter);
-  // }
-
-  // first character and row divs are in the correct places
+  }
 
   for (var i = 0; i < characters.length; i++){
     var $genericCharacter = $('<div>').addClass('character');
     $genericCharacter.attr("id", i);
-    // $genericCharacter.find('#firstCol' + i).after('<div class="col-md-6 id="secondCol' + i +'">').append('<div class="characterName">').html(characters[i].characterName).append('<div class="characterAttack" id="' + i + '">');
     $genericCharacter.append('<div class="row" id="row' + i + '">');
     $genericCharacter.find('#row' + i).append('<div class="col-6" id="firstCol' + i + '">');
     $genericCharacter.find('#row' + i).append('<div class="col-6" id="secondCol' + i +'">');
 
 
     $genericCharacter.find('#firstCol' + i).append('<img src="./assets/images/' + characters[i].fileName + '.jpg" class="characterImage">');
-    $genericCharacter.find('#secondCol' + i).append('<div class="characterName">').html(characters[i].characterName).append('<div class="characterAttack" id="' + i + '">')
+    $genericCharacter.find('#secondCol' + i).append('<div class="characterName" id="' + i + '">');
     $genericCharacter.find('#secondCol' + i).append('<div class="characterHealth" id="' + i + '">');
     $genericCharacter.find('#secondCol' + i).append('<div class="characterAttack" id="' + i + '">');
-    // .append('<img src="./assets/images/' + characters[i].fileName + '.jpg" class="characterImage">');
-    // $genericCharacter.find('#row' + i).append('<div class="col-6" id="secondCol' + i +'">').append('<div class="characterName">').html(characters[i].characterName).append('<div class="characterAttack" id="' + i + '">');
+    $genericCharacter.find('#secondCol' + i).append('<div class="selectButton" id="' + i + '">');
 
     $('#characterSelection').append($genericCharacter);
+
+    updateCharacters();
   }
+
+  $()
 });
 
 
