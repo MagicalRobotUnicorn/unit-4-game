@@ -64,6 +64,17 @@ $(document).ready(function(){
     }
   }
 
+  function createEnemies(){
+    for (var i = 0; i < characters.length; i++){
+      if (i != playerCharacter){
+        $('#enemyArea').append($('#' + i + '.character'));
+      }
+      else {
+        $('#playerArea').append($('#' + i + '.character'));
+      }
+    }
+  }
+
   for (var i = 0; i < characters.length; i++){
     var $genericCharacter = $('<div>').addClass('character');
     $genericCharacter.attr("id", i);
@@ -86,6 +97,7 @@ $(document).ready(function(){
 
   $('.selectButton').on('click', function() {
       playerCharacter = $(this).attr('id');
+      createEnemies();
   });
 });
 
