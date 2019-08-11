@@ -25,6 +25,7 @@ var bobaFett = new Character('Boba Fett', 150, 20, "bobaFett");
 var darthMaul = new Character('Darth Maul', 180, 25, "darthMaul");
 
 var characters = [obiWan, lukeSkywalker, bobaFett, darthMaul];
+// var defeatedCharacters = 0;
 var playerCharacter;
 var enemyCharacter;
 
@@ -60,11 +61,9 @@ function prepareEnemy() {
     if (i != playerCharacter) {
       var subString = characters[i].characterName.substring(0, (characters[i].characterName.indexOf(" ")));
 
-      // $('#' + i + 'buttonArea').html('<button class="chooseEnemyButton" id="' + i + '">Fight ' + subString + '</button>');
       $('#' + i + '.selectButton').addClass('chooseEnemyButton');
       $('#' + i + '.chooseEnemyButton').removeClass('selectButton');
       $('#' + i + '.chooseEnemyButton').text('Fight ' + subString);
-      // $('#' + i + '.chooseEnemyButton').html('<button id="' + i + '">Fight ' + subString + '</button>');
     }
     else {
       $('#' + i + '.buttonArea').html('');
@@ -74,6 +73,17 @@ function prepareEnemy() {
 
 function chooseEnemy(index) {
   console.log(index);
+  for (var i = 0; i < characters.length; i++) {
+    if (i != playerCharacter) {
+
+      $('#' + i + '.buttonArea').html('');
+
+    }
+    else {
+      $('#' + i + '.buttonArea').html('<button class="attackButton" id="' + i + '">Attack</button>');
+    }
+  }
+
   $currentEnemy.append($('#' + index + '.character'));
 }
 
@@ -99,11 +109,6 @@ function prepareGame() {
   }
 }
 
-function checkWin() {
-  return true;
-}
-
-
 $(document).ready(function () {
   prepareGame();
   updateCharacters();
@@ -119,25 +124,22 @@ $(document).ready(function () {
       createEnemies();
       prepareEnemy();
     }
+    else if (this.classList.contains('attackButton')) {
+      console.log("Hello");
+      characters[playerCharacter].attack(characters[enemyCharacter]);
+      updateCharacters();
+    }
   });
-
-  // $('.chooseEnemyButton').on('click', function () {
-  //   console.log("Hello World");
-  //   enemyCharacter = $(this).attr('id');
-  //   chooseEnemy(enemyCharacter);
-  // });
-
-  // $('.selectButton').on('click', function () {
-  //   playerCharacter = $(this).attr('id');
-  //   createEnemies();
-  //   prepareEnemy();
-  // });
-
-
 });
 
 
 
+// Attack Current Enemy On Click
+// When Enemy Health is equal to zero, enemy class changes to defeated and returns to enemy area
+// Enemy selection repeats
+
+// When hero health goes to zero game is over
+// When all enemies are defeated game is over
 
 // // Fight Section
 
