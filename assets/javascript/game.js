@@ -18,10 +18,8 @@ Character.prototype.attack = function (enemyCharacter) {
   enemyCharacter.currentHitPoints -= this.attackPower;
   message += this.characterName + " attacked " + enemyCharacter.characterName + " for " + this.attackPower + ' damage.<br />';
 
-  if (enemyCharacter.currentHitPoints > 0){
-    this.currentHitPoints -= enemyCharacter.attackPower;
-    message += enemyCharacter.characterName + " struck back for " + enemyCharacter.attackPower + ' damage.<br />';
-  }
+  this.currentHitPoints -= enemyCharacter.attackPower;
+  message += enemyCharacter.characterName + " struck " + this.characterName + " for " + enemyCharacter.attackPower + ' damage.<br />';
 
   this.attackPower *= 2;
 }
