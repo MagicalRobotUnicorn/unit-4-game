@@ -1,3 +1,12 @@
+body {
+  background-color: black;
+  color: yellow;
+}
+
+h1 {
+  font-family: 'StarWars';
+}
+
 #container {
   width: 1600px;
 }
@@ -5,22 +14,36 @@
 .character {
   width: 400px;
   height: 250px;
-  background: green;
+  border: 5px double yellow;
+  border-radius: 20px;
+  /* background: green; */
   margin: 10px;
   display: inline-block;
 }
 
 .defeated {
-  background: red;
+  /* background: red; */
+  border: 5px double red;
+  border-radius: 20px;
+}
+
+.defeated .characterImage {
+  border: 3px solid red;
+  border-radius: 5px;
 }
 
 .characterImage {
+  border: 3px solid yellow;
+  border-radius: 5px;
+  padding: 5px;
+
   width: 150px;
   height: auto;
   margin-left: 20px;
   margin-right: auto;
   margin-top: 35px;
   margin-bottom: 20px;
+
 }
 
 .characterName {
@@ -37,7 +60,8 @@
 #notificationArea {
   width: 400px;
   height: 250px;
-  background: white;
-  border: 2px solid black;
+  border: 5px double yellow;
+  border-radius: 20px;
   margin: 10px;
+  padding: 10px;
 }

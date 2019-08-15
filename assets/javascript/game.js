@@ -4,6 +4,8 @@ var $currentEnemy = $('#currentEnemy');
 var $playerArea = $('#playerArea');
 var $notificationArea = $('#notificationArea');
 
+
+
 function Character(characterName, hitPoints, attackPower, fileName) {
   this.characterName = characterName;
   this.totalHitPoints = hitPoints;
@@ -20,7 +22,7 @@ Character.prototype.attack = function (enemyCharacter) {
 
   this.currentHitPoints -= enemyCharacter.attackPower;
   message += enemyCharacter.characterName + " struck " + this.characterName + " for " + enemyCharacter.attackPower + ' damage.<br />';
-
+ 
   this.attackPower *= 2;
 }
 
@@ -42,13 +44,14 @@ function updateCharacters() {
   }
 }
 
+
 function prepareSelection() {
 
   $('#instructionHeading').html('<h2>Select A Character</h2>');
 
   for (var i = 0; i < characters.length; i++) {
     var subString = characters[i].characterName.substring(0, (characters[i].characterName.indexOf(" ")));
-    $('#' + i + '.buttonArea').html('<button class="selectButton" id="' + i + '">Select ' + subString + '</button>');
+    $('#' + i + '.buttonArea').html('<button type="button" class="selectButton btn btn-outline-warning" id="' + i + '">Select ' + subString + '</button>');
   }
 }
 
@@ -70,7 +73,7 @@ function prepareEnemy() {
     if (i != playerCharacter) {
 
       var subString = characters[i].characterName.substring(0, (characters[i].characterName.indexOf(" ")));
-      $('#' + i + '.buttonArea').html('<button class="selectButton" id="' + i + '">Select ' + subString + '</button>');
+      $('#' + i + '.buttonArea').html('<button type="button" class="selectButton btn btn-outline-warning" id="' + i + '">Select ' + subString + '</button>');
       $('#' + i + '.selectButton').addClass('chooseEnemyButton');
       $('#' + i + '.chooseEnemyButton').removeClass('selectButton');
       $('#' + i + '.chooseEnemyButton').text('Fight ' + subString);
@@ -93,7 +96,7 @@ function chooseEnemy(index) {
 
     }
     else {
-      $('#' + i + '.buttonArea').html('<button class="attackButton" id="' + i + '">Attack</button>');
+      $('#' + i + '.buttonArea').html('<button type="button" class="attackButton btn btn-outline-warning" id="' + i + '">Attack</button>');
     }
   }
 
