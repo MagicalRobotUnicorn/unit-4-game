@@ -4,7 +4,11 @@ var $currentEnemy = $('#currentEnemy');
 var $playerArea = $('#playerArea');
 var $notificationArea = $('#notificationArea');
 
+// Make sure to allow Pop Ups!
 
+window.onload = function() {
+   window.open('./video.html','Intro Video',' menubar=0, resizable=0,dependent=0,status=0,width=1000,height=550')
+}
 
 function Character(characterName, hitPoints, attackPower, fileName) {
   this.characterName = characterName;
@@ -47,7 +51,11 @@ function updateCharacters() {
 
 function prepareSelection() {
 
-  $('#instructionHeading').html('<h2>Select A Character</h2>');
+  // $enemyArea.append('<div class="col-1"><img src="./assets/images/otherenemies.png" class="sideImage rotateImage"></div>');
+  // $currentEnemy.append('<div class="col-1"><img src="./assets/images/opponent.png" class="sideImage rotateImage"></div>');
+  // $playerArea.append('<div class="col-1"><img src="./assets/images/otherenemies.png" class="sideImage rotateImage"></div>');
+
+  $('#instructionHeading').html('<img src="./assets/images/selectcharacter.png">');
 
   for (var i = 0; i < characters.length; i++) {
     var subString = characters[i].characterName.substring(0, (characters[i].characterName.indexOf(" ")));
@@ -62,12 +70,13 @@ function createEnemies() {
     }
     else {
       $('#playerArea').append($('#' + i + '.character'));
+      $('#playerArea').append($('#notificationArea'));
     }
   }
 }
 
 function prepareEnemy() {
-  $('#instructionHeading').html('<h2>Select An Opponent</h2>');
+  $('#instructionHeading').html('<img src="./assets/images/selectenemy.png">');
 
   for (var i = 0; i < characters.length; i++) {
     if (i != playerCharacter) {
@@ -87,7 +96,7 @@ function prepareEnemy() {
 }
 
 function chooseEnemy(index) {
-  $('#instructionHeading').html('<h2>Fight!</h2>');
+  $('#instructionHeading').html('<img src="./assets/images/fight.png">');
   console.log(index);
   for (var i = 0; i < characters.length; i++) {
     if (i != playerCharacter) {
@@ -100,6 +109,8 @@ function chooseEnemy(index) {
     }
   }
 
+  // $enemyArea.prepend('<img src="./assets/images/otherenemies.png" class="sideImage rotateImage">')
+  // $currentEnemy.append('<img src="./assets/images/opponent.png" class="sideImage rotateImage">')
   $currentEnemy.append($('#' + index + '.character'));
 }
 
@@ -107,7 +118,7 @@ function checkCharacters() {
   if (characters[enemyCharacter].currentHitPoints <= 0) {
     $('#' + enemyCharacter + '.character').addClass('defeated');
     message += "<br />You defeated " + characters[enemyCharacter].characterName + "!!";
-
+    removeImage();
     createEnemies();
     prepareEnemy();
   }
@@ -119,21 +130,32 @@ function checkVictory() {
     message += "<br />You won the game!";
     $('#notificationArea').html(message);
     $('.buttonArea').html('');
-    $('#instructionHeading').html('<h2>You Won!</h2>');
+    $('#instructionHeading').html('<img src="./assets/images/youwon.png">');
 
 
   }
   if (characters[playerCharacter].currentHitPoints <= 0) {
-    message += "<br />You lost the game!";
+    message = "You lost the game!";
     $('#' + playerCharacter + '.character').addClass('defeated');
     $('#notificationArea').html(message);
     $('.buttonArea').html('');
-    $('#instructionHeading').html('<h2>You Lost!</h2>');
+    $('#instructionHeading').html('<img src="./assets/images/youlost.png">');
 
   }
 }
 
+function addImages(){
+  $enemyArea.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/otherenemies.png" class="sideImage rotateImage"><div class="col1">');
+  $currentEnemy.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/opponent.png" class="sideImage rotateImage">');
+  $playerArea.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/yourhero.png" class="sideImage rotateImage">');
+}
+
+function removeImage(){
+  $('.sideImageDiv').remove();
+}
+
 function prepareGame() {
+
 
   for (var i = 0; i < characters.length; i++) {
     var $genericCharacter = $('<div>').addClass('character');
@@ -175,5 +197,6 @@ $(document).ready(function () {
   $("body").on("click", ".buttonArea button.chooseEnemyButton", function () {
     enemyCharacter = $(this).attr('id');
     chooseEnemy(enemyCharacter);
+    addImages();
   });
 });
