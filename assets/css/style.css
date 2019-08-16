@@ -56,6 +56,10 @@ body {
 
 }
 
+#notificationArea.character {
+  float: right;
+}
+
 .characterName {
   margin-top: 35px;
   margin-left: 20px;
@@ -82,7 +86,6 @@ body {
   width: 200px;
   height: auto;
   margin-bottom: -75px;
-  display: inline-block;
 }
 .rotateImage {
   -ms-transform: rotate(-90deg); 
@@ -93,6 +96,7 @@ body {
 .sideImageDiv {
   display: inline-block;
   margin-right: 75px;
+  height: 100px;
 }
 
 .invisible {
