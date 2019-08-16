@@ -145,9 +145,9 @@ function checkVictory() {
 }
 
 function addImages(){
-  $enemyArea.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/otherenemies.png" class="sideImage rotateImage"><div class="col1">');
-  $currentEnemy.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/opponent.png" class="sideImage rotateImage">');
-  $playerArea.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/yourhero.png" class="sideImage rotateImage">');
+  $enemyArea.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/otherenemies.png" class="sideImage rotateImage"></div>');
+  $currentEnemy.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/opponent.png" class="sideImage rotateImage" id="opponentHeader"></div>');
+  $playerArea.prepend('<div class="col-md-1 sideImageDiv"><img src="./assets/images/yourhero.png" class="sideImage rotateImage"></div>');
 }
 
 function removeImage(){
